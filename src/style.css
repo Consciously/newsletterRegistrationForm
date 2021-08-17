@@ -1,0 +1,131 @@
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-size: 16px;
+	line-height: 1.5;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: #121212;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: #e0e0e0;
+	transition: background-color 0.08s ease-in;
+}
+
+h3 {
+	font-size: 1.8rem;
+	text-align: center;
+	margin-bottom: 0.5rem;
+	text-transform: uppercase;
+	color: #1c2c30;
+}
+
+.container {
+	width: 100%;
+	max-width: 60rem;
+	margin: 0 auto;
+	background-color: #48717c;
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 1.25rem;
+	position: relative;
+}
+
+.close {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 30px;
+	width: 30px;
+	right: 15px;
+	top: 15px;
+	border: 1px solid #1c2c30;
+	border-radius: 50%;
+	color: #1c2c30;
+	transition: background-color 0.2s, color 0.2s, border-color 0.2s ease-in;
+}
+
+.close-hover {
+	background-color: #1c2c30;
+	color: #e0e0e0;
+	border-color: #1c2c30;
+}
+
+.overlay {
+	background-color: #383838;
+}
+
+.newsletter {
+	background-color: #1c2c30;
+	padding: 2rem 5rem;
+	margin-top: 2rem;
+	border-radius: 1.25rem;
+	height: 25rem;
+}
+
+.newsletter p {
+	color: #e0e0e0;
+	font-size: 1.2rem;
+}
+
+.newsletter form,
+.newsletter p {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.newsletter h3 {
+	color: #ac353d;
+}
+
+.newsletter form #email {
+	background-color: #fff;
+	width: 100%;
+	font-size: 1.5rem;
+	margin-bottom: 1.5rem;
+	padding: 1.5rem;
+	border: 0;
+	outline: 0;
+	transition: background-color 0.2s ease-in;
+}
+
+.newsletter form #email:focus {
+	border: 0;
+	outline: 0;
+	background-color: #e0e0e0;
+}
+
+.newsletter form input[type='email']:blur {
+	background-color: #fff;
+}
+
+.newsletter form .subscribe {
+	border: 0;
+	outline: 0;
+	width: 10rem;
+	margin-bottom: 0;
+	padding: 1rem 0.5rem;
+	background-color: #ac353d;
+	color: #e0e0e0;
+	border-radius: 1.25rem;
+	transition: background-color 0.2s ease-in;
+}
+
+.newsletter form .subscribe:hover {
+	background-color: #b83941;
+}
