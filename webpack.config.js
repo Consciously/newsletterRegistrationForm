@@ -1,7 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = {
+module.exports = (_, { mode }) => ({
 	// entry point
 	entry: {
 		app: path.resolve(__dirname, 'src', 'app.js')
@@ -22,8 +23,11 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
+				test: /\.s?css$/i,
+				use: [
+					mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+					'css-loader'
+				]
 			},
 			{
 				test: /\.?js$/,
@@ -43,8 +47,10 @@ module.exports = {
 	// plugins
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: path.resolve(__dirname, 'src', 'index.html')
-		})
+			template: path.resolve(__dirname, 'src', 'index.html'),
+			filename: path.resolve(__dirname, 'build', 'index.html')
+		}),
+		new MiniCssExtractPlugin()
 	],
 	// code splitting
 	optimization: {
@@ -52,4 +58,4 @@ module.exports = {
 	},
 	// mode
 	mode: 'development'
-};
+});
