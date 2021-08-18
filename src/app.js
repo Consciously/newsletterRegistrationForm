@@ -2,7 +2,7 @@ import './style.css';
 
 window.addEventListener('DOMContentLoaded', () => {
 	const init = () => {
-		const body = document.body;
+		const { body } = document;
 
 		const createInitialContent = () => {
 			const container = document.createElement('DIV');
@@ -90,6 +90,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				deleteContainer();
 
 				setTimeout(() => {
+					// eslint-disable-next-line no-restricted-globals
 					location.reload();
 				}, 200);
 			});
