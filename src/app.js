@@ -3,30 +3,43 @@ import './style.css';
 window.addEventListener('DOMContentLoaded', () => {
 	const init = () => {
 		const { body } = document;
+		const container = document.querySelector('.container');
 
-		const createInitialContent = () => {
-			const container = document.createElement('DIV');
-			container.classList.add('container');
-
+		const initialContent = () => {
 			const initText = `
 				<h3>Nothing here yet!</h3>
 			`;
 
 			container.innerHTML = initText;
-
-			body.appendChild(container);
 		};
 
+		const deleteElemsInContainer = () => {
+			while (container.firstChild) {
+				container.removeChild(container.firstChild);
+			}
+		};
+
+		const closeBtn = () => {
+			if (!container.querySelector('.close')) {
+				const close = document.createElement('DIV');
+				close.classList.add('close');
+				close.textContent = 'X';
+				container.appendChild(close);
+				close.addEventListener('mouseenter', e => {
+					e.target.classList.add('close-hover');
+				});
+				close.addEventListener('mouseleave', e => {
+					e.target.classList.remove('close-hover');
+				});
+
+				close.addEventListener('click', () => {
+					deleteElemsInContainer();
+					initialContent();
+					body.classList.remove('overlay');
+				});
+			}
+		};
 		const createNewsletter = () => {
-			const container = document.createElement('DIV');
-			container.classList.add('container');
-
-			const close = document.createElement('DIV');
-			close.classList.add('close');
-			close.textContent = 'X';
-
-			container.appendChild(close);
-
 			const newsletter = `
 				<div class="newsletter">
 					<h3>To stay up-to-date, please subscribe our newsletter!</h3>
@@ -38,21 +51,10 @@ window.addEventListener('DOMContentLoaded', () => {
 			`;
 
 			container.innerHTML += newsletter;
-
-			body.appendChild(container);
-			return container;
+			closeBtn();
 		};
 
 		const createConfirmation = () => {
-			const container = document.createElement('DIV');
-			container.classList.add('container');
-
-			const close = document.createElement('DIV');
-			close.classList.add('close');
-			close.textContent = 'X';
-
-			container.appendChild(close);
-
 			const confirmation = `
 				<div class="newsletter">
 					<h3>Confirmation of your subscription</h3>
@@ -63,56 +65,29 @@ window.addEventListener('DOMContentLoaded', () => {
 			`;
 
 			container.innerHTML += confirmation;
-
-			body.appendChild(container);
-			return container;
-		};
-
-		const deleteContainer = () => {
-			const container = document.querySelector('.container');
-			body.removeChild(container);
-		};
-
-		const deleteNewsletter = () => {
-			const close = document
-				.querySelector('.container')
-				.querySelector('.close');
-
-			close.addEventListener('mouseenter', e => {
-				e.target.classList.add('close-hover');
-			});
-
-			close.addEventListener('mouseleave', e => {
-				e.target.classList.remove('close-hover');
-			});
-
-			close.addEventListener('click', () => {
-				deleteContainer();
-
-				setTimeout(() => {
-					// eslint-disable-next-line no-restricted-globals
-					location.reload();
-				}, 200);
-			});
+			closeBtn();
 		};
 
 		const handleNewsletterSubmit = e => {
 			e.preventDefault();
-			deleteContainer();
+			deleteElemsInContainer();
 			createConfirmation();
 		};
 
 		const showNewsletter = () => {
-			const newsletter = createNewsletter();
-			deleteContainer();
-			deleteNewsletter();
+			deleteElemsInContainer();
+
+			createNewsletter();
+			body.removeEventListener('click', showNewsletter);
+
+			// deleteNewsletter();
 			body.classList.add('overlay');
-			const subscribeForm = newsletter.querySelector('#newsletterForm');
+			const subscribeForm = document.querySelector('#newsletterForm');
 
 			subscribeForm.addEventListener('submit', handleNewsletterSubmit);
 		};
 
-		createInitialContent();
+		initialContent();
 
 		body.addEventListener('click', showNewsletter);
 	};
