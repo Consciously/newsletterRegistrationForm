@@ -6,9 +6,17 @@ module.exports = {
 	entry: {
 		app: path.resolve(__dirname, 'src', 'app.js')
 	},
+	// devtools
+	devtool: 'inline-source-map',
+	devServer: {
+		contentBase: './dist',
+		hot: true
+	},
 	// output
 	output: {
-		path: path.resolve(__dirname, 'build')
+		filename: '[name].bundle.js',
+		path: path.resolve(__dirname, 'build'),
+		clean: true
 	},
 	// loaders
 	module: {

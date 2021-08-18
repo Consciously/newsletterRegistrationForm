@@ -80,16 +80,15 @@ window.addEventListener('DOMContentLoaded', () => {
 			createNewsletter();
 			body.removeEventListener('click', showNewsletter);
 
-			// deleteNewsletter();
 			body.classList.add('overlay');
 			const subscribeForm = document.querySelector('#newsletterForm');
 
 			subscribeForm.addEventListener('submit', handleNewsletterSubmit);
 		};
 
-		initialContent();
-
 		body.addEventListener('click', showNewsletter);
+
+		initialContent();
 	};
 
 	init();
