@@ -10,7 +10,7 @@ module.exports = (_, { mode }) => ({
 	// devtools
 	devtool: 'inline-source-map',
 	devServer: {
-		contentBase: './dist',
+		contentBase: './build',
 		hot: true
 	},
 	// output
@@ -23,13 +23,6 @@ module.exports = (_, { mode }) => ({
 	module: {
 		rules: [
 			{
-				test: /\.s?css$/i,
-				use: [
-					mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
-					'css-loader'
-				]
-			},
-			{
 				test: /\.?js$/,
 				exclude: /node_modules/,
 				use: [
@@ -40,6 +33,13 @@ module.exports = (_, { mode }) => ({
 						}
 					},
 					{ loader: 'eslint-loader' }
+				]
+			},
+			{
+				test: /\.s?css$/i,
+				use: [
+					mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+					'css-loader'
 				]
 			}
 		]

@@ -18,6 +18,7 @@ body {
 	height: 100vh;
 	background-color: #e0e0e0;
 	transition: background-color 0.08s ease-in;
+	position: relative;
 }
 
 h3 {
@@ -65,6 +66,38 @@ h3 {
 
 .overlay {
 	background-color: #383838;
+}
+
+.showMessage {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 25vw;
+	padding: 2rem 5rem;
+	font-size: 1.2rem;
+	/* animation-name: messageGoesUp;
+	animation-duration: 2s; */
+}
+
+.showMessage.error {
+	background-color: rgb(231, 79, 79);
+}
+
+.showMessage.ok {
+	background-color: rgb(79, 231, 117);
+}
+
+@keyframes messageGoesUp {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translate(-9999px);
+	}
 }
 
 .newsletter {
