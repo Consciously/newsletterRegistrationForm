@@ -1,95 +1,107 @@
 import './style.css';
 
-window.addEventListener('DOMContentLoaded', () => {
-	const init = () => {
-		const { body } = document;
-		const container = document.querySelector('.container');
+class Newsletter {
+	constructor() {
+		this.document = document;
+		this.body = document.body;
+		this.container = document.querySelector('.container');
+		this.newsletter = this.container.querySelector('.newsletter');
+	}
 
-		const initialContent = () => {
-			const initText = `
-				<h3>Nothing here yet!</h3>
-			`;
+	initialContent = () => {
+		const initText = `
+			<h3>Subscribe our newsletter!</h3>
+		`;
 
-			container.innerHTML = initText;
-		};
+		this.container.innerHTML = initText;
 
-		const deleteElemsInContainer = () => {
-			while (container.firstChild) {
-				container.removeChild(container.firstChild);
-			}
-		};
-
-		const closeBtn = () => {
-			if (!container.querySelector('.close')) {
-				const close = document.createElement('DIV');
-				close.classList.add('close');
-				close.textContent = 'X';
-				container.appendChild(close);
-				close.addEventListener('mouseenter', e => {
-					e.target.classList.add('close-hover');
-				});
-				close.addEventListener('mouseleave', e => {
-					e.target.classList.remove('close-hover');
-				});
-
-				close.addEventListener('click', () => {
-					deleteElemsInContainer();
-					initialContent();
-					body.classList.remove('overlay');
-				});
-			}
-		};
-		const createNewsletter = () => {
-			const newsletter = `
-				<div class="newsletter">
-					<h3>To stay up-to-date, please subscribe our newsletter!</h3>
-					<form id="newsletterForm">
-						<input type="email" id="email" />
-						<input type="submit" class="subscribe" value="Subscribe" />
-					</form>
-				</div>
-			`;
-
-			container.innerHTML += newsletter;
-			closeBtn();
-		};
-
-		const createConfirmation = () => {
-			const confirmation = `
-				<div class="newsletter">
-					<h3>Confirmation of your subscription</h3>
-					<p>
-						Hey and thank you for your subscription. We send a email to you. Plese check your inbox of your email provider and click the confirmation link to complete the subscription. We appreciate your choice and we promise not to spam you!
-					</p>
-				</div>
-			`;
-
-			container.innerHTML += confirmation;
-			closeBtn();
-		};
-
-		const handleNewsletterSubmit = e => {
-			e.preventDefault();
-			deleteElemsInContainer();
-			createConfirmation();
-		};
-
-		const showNewsletter = () => {
-			deleteElemsInContainer();
-
-			createNewsletter();
-			body.removeEventListener('click', showNewsletter);
-
-			body.classList.add('overlay');
-			const subscribeForm = document.querySelector('#newsletterForm');
-
-			subscribeForm.addEventListener('submit', handleNewsletterSubmit);
-		};
-
-		body.addEventListener('click', showNewsletter);
-
-		initialContent();
+		this.bodyEvent();
 	};
 
-	init();
-});
+	deleteElemsInContainer = () => {
+		while (this.container.firstChild) {
+			this.container.removeChild(this.container.firstChild);
+		}
+	};
+
+	closeBtn = () => {
+		if (!this.container.querySelector('.close')) {
+			const close = document.createElement('DIV');
+			close.classList.add('close');
+			close.textContent = 'X';
+			this.container.appendChild(close);
+			close.addEventListener('mouseenter', e => {
+				e.target.classList.add('close-hover');
+			});
+			close.addEventListener('mouseleave', e => {
+				e.target.classList.remove('close-hover');
+			});
+
+			close.addEventListener('click', () => {
+				this.body.classList.remove('overlay');
+				this.deleteElemsInContainer();
+				this.initialContent();
+			});
+		}
+	};
+
+	createNewsletter = () => {
+		const newsletterDiv = this.document.createElement('div');
+		newsletterDiv.classList.add('newsletter');
+		const newsletter = `
+					<h3>To stay up-to-date, please subscribe our newsletter!</h3>
+					<form id="newsletterForm"">
+						<input type="email" id="email" oninput="handleSubmit(event)" />
+						<input type="submit" class="subscribe" value="Subscribe" />
+					</form>
+		`;
+
+		newsletterDiv.innerHTML += newsletter;
+
+		this.container.appendChild(newsletterDiv);
+
+		this.closeBtn();
+	};
+
+	createConfirmation = () => {
+		const confirmation = `
+			<div class="newsletter">
+				<h3>Confirmation of your subscription</h3>
+				<p>
+					Hey and thank you for your subscription. We send a email to you. Plese check your inbox of your email provider and click the confirmation link to complete the subscription. We appreciate your choice and we promise not to spam you!
+				</p>
+			</div>
+		`;
+
+		this.container.innerHTML += confirmation;
+		this.closeBtn();
+	};
+
+	handleNewsletterSubmit = event => {
+		event.preventDefault();
+		this.deleteElemsInContainer();
+		this.createConfirmation();
+	};
+
+	showNewsletter = () => {
+		this.deleteElemsInContainer();
+
+		this.createNewsletter();
+		this.body.removeEventListener('click', this.showNewsletter);
+
+		this.body.classList.add('overlay');
+
+		const subscribeForm = this.container.querySelector('#newsletterForm');
+
+		subscribeForm.addEventListener('submit', this.handleNewsletterSubmit);
+	};
+
+	bodyEvent = () => {
+		this.body.addEventListener('click', e => {
+			if (e.target.classList.contains('container')) this.showNewsletter();
+		});
+	};
+}
+
+const newsletter = new Newsletter();
+newsletter.initialContent();

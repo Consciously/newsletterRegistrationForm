@@ -13,7 +13,6 @@ module.exports = (_, { mode }) => ({
 		contentBase: './build',
 		hot: true
 	},
-	// output
 	output: {
 		filename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'build'),
@@ -36,7 +35,7 @@ module.exports = (_, { mode }) => ({
 				]
 			},
 			{
-				test: /\.s?css$/i,
+				test: /\.css$/i,
 				use: [
 					mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
 					'css-loader'
@@ -48,7 +47,9 @@ module.exports = (_, { mode }) => ({
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, 'src', 'index.html'),
-			filename: path.resolve(__dirname, 'build', 'index.html')
+			filename: 'index.html',
+			inject: 'body',
+			scriptLoading: 'blocking'
 		}),
 		new MiniCssExtractPlugin()
 	],
