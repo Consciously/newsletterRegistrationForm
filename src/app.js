@@ -51,7 +51,7 @@ class Newsletter {
 		const newsletter = `
 					<h3>To stay up-to-date, please subscribe our newsletter!</h3>
 					<form id="newsletterForm"">
-						<input type="email" id="email" oninput="handleSubmit(event)" />
+						<input type="email" id="email" />
 						<input type="submit" class="subscribe" value="Subscribe" />
 					</form>
 		`;
@@ -77,10 +77,42 @@ class Newsletter {
 		this.closeBtn();
 	};
 
-	handleNewsletterSubmit = event => {
-		event.preventDefault();
-		this.deleteElemsInContainer();
-		this.createConfirmation();
+	createMessage = msgType => {
+		const notificationDiv = this.document.createElement('DIV');
+		notificationDiv.classList.add('showMessage');
+		this.body.appendChild(notificationDiv);
+
+		switch (msgType) {
+			case 'success':
+				notificationDiv.classList.add('show', 'success');
+				notificationDiv.innerHTML =
+					'<h4>Sending you email address was successful!</h4>';
+				break;
+			case 'error':
+				notificationDiv.classList.add('show', 'error');
+				notificationDiv.innerHTML = '<h4>You missing your email address!</h4>';
+				break;
+			default:
+				break;
+		}
+
+		if (notificationDiv.classList.contains('show')) {
+			setTimeout(() => {
+				notificationDiv.classList.remove('show');
+			}, 4000);
+		}
+	};
+
+	handleNewsletterSubmit = e => {
+		e.preventDefault();
+		const emailValue = e.target.email.value;
+		if (emailValue.length === 0) {
+			this.createMessage('error');
+		} else {
+			this.createMessage('success');
+			this.deleteElemsInContainer();
+			this.createConfirmation();
+		}
 	};
 
 	showNewsletter = () => {
