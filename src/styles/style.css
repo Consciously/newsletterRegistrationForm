@@ -41,6 +41,16 @@ h3 {
 	align-items: center;
 	border-radius: 1.25rem;
 	position: relative;
+	box-shadow: 0px 3px 10px rgb(0 0 0 / 60%);
+}
+
+.container.small {
+	animation-name: makeSmalller;
+	animation-duration: 0.2s;
+	animation-timing-function: ease-in;
+	animation-direction: normal;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
 }
 
 .close {
@@ -80,6 +90,7 @@ h3 {
 	padding: 2rem 5rem;
 	font-size: 1.2rem;
 	opacity: 0;
+	box-shadow: 0px 3px 10px rgb(0 0 0 / 60%);
 	animation-name: messageUp;
 	animation-duration: 0.2s;
 	animation-timing-function: ease-in;
@@ -103,52 +114,6 @@ h3 {
 
 .showMessage.success {
 	background-color: rgb(79, 231, 117);
-}
-
-@keyframes messageDown {
-	0% {
-		transform: translate(-50%, -100%);
-		opacity: 0;
-	}
-	25% {
-		transform: translate(-50%, -75%);
-		opacity: 0.25;
-	}
-	50% {
-		transform: translate(-50%, -50%);
-		opacity: 0.5;
-	}
-	75% {
-		transform: translate(-50%, -25);
-		opacity: 0.75;
-	}
-	100% {
-		transform: translate(-50%, 0%);
-		opacity: 1;
-	}
-}
-
-@keyframes messageUp {
-	0% {
-		transform: translate(-50%, 0%);
-		opacity: 1;
-	}
-	25% {
-		transform: translate(-50%, -25%);
-		opacity: 0.75;
-	}
-	50% {
-		transform: translate(-50%, -50%);
-		opacity: 0.5;
-	}
-	75% {
-		transform: translate(-50%, -75);
-		opacity: 0.25;
-	}
-	100% {
-		transform: translate(-50%, -100%);
-		opacity: 0;
-	}
 }
 
 .newsletter {
@@ -212,4 +177,62 @@ h3 {
 
 .newsletter form .subscribe:hover {
 	background-color: #b83941;
+}
+
+/* Animations */
+@keyframes messageDown {
+	0% {
+		transform: translate(-50%, -100%);
+		opacity: 0;
+	}
+	25% {
+		transform: translate(-50%, -75%);
+		opacity: 0.25;
+	}
+	50% {
+		transform: translate(-50%, -50%);
+		opacity: 0.5;
+	}
+	75% {
+		transform: translate(-50%, -25);
+		opacity: 0.75;
+	}
+	100% {
+		transform: translate(-50%, 0%);
+		opacity: 1;
+	}
+}
+
+@keyframes messageUp {
+	0% {
+		transform: translate(-50%, 0%);
+		opacity: 1;
+	}
+	25% {
+		transform: translate(-50%, -25%);
+		opacity: 0.75;
+	}
+	50% {
+		transform: translate(-50%, -50%);
+		opacity: 0.5;
+	}
+	75% {
+		transform: translate(-50%, -75);
+		opacity: 0.25;
+	}
+	100% {
+		transform: translate(-50%, -100%);
+		opacity: 0;
+	}
+}
+
+@keyframes makeSmalller {
+	0% {
+		width: 100%;
+		border-radius: 1.25rem;
+	}
+	100% {
+		width: 7vw;
+		border-radius: 7rem;
+	}
 }

@@ -1,4 +1,5 @@
 import './styles/style.css';
+import showLoader from './loader';
 
 class Newsletter {
 	constructor() {
@@ -45,6 +46,11 @@ class Newsletter {
 		}
 	};
 
+	showLoader = () => {
+		this.deleteElemsInContainer();
+		showLoader();
+	};
+
 	createNewsletter = () => {
 		const newsletterDiv = this.document.createElement('div');
 		newsletterDiv.classList.add('newsletter');
@@ -82,9 +88,6 @@ class Newsletter {
 		notificationDiv.classList.add('showMessage');
 		this.body.appendChild(notificationDiv);
 
-		// const hasShowMessageClass = this.document
-		// 	.querySelector('.showMessage')
-		// 	.classList.contains('show');
 		switch (msgType) {
 			case 'success':
 				notificationDiv.classList.add('show', 'success');
@@ -112,9 +115,14 @@ class Newsletter {
 		if (emailValue.length === 0) {
 			this.createMessage('error');
 		} else {
-			this.createMessage('success');
-			this.deleteElemsInContainer();
-			this.createConfirmation();
+			this.container.classList.add('small');
+			this.showLoader();
+			setTimeout(() => {
+				this.container.classList.remove('small');
+				this.deleteElemsInContainer();
+				this.createMessage('success');
+				this.createConfirmation();
+			}, 1500);
 		}
 	};
 
