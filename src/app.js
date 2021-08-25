@@ -1,4 +1,4 @@
-import './style.css';
+import './styles/style.css';
 
 class Newsletter {
 	constructor() {
@@ -82,6 +82,9 @@ class Newsletter {
 		notificationDiv.classList.add('showMessage');
 		this.body.appendChild(notificationDiv);
 
+		// const hasShowMessageClass = this.document
+		// 	.querySelector('.showMessage')
+		// 	.classList.contains('show');
 		switch (msgType) {
 			case 'success':
 				notificationDiv.classList.add('show', 'success');
