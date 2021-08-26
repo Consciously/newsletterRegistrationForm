@@ -88,27 +88,27 @@ class Newsletter {
 	};
 
 	createMessage = msgType => {
-		const notificationDiv = this.document.createElement('DIV');
-		notificationDiv.classList.add('showMessage');
-		this.body.appendChild(notificationDiv);
+		const showMessageDiv = this.document.createElement('DIV');
+		showMessageDiv.classList.add('showMessage');
+		this.body.appendChild(showMessageDiv);
 
 		switch (msgType) {
 			case 'success':
-				notificationDiv.classList.add('show', 'success');
-				notificationDiv.innerHTML =
+				showMessageDiv.classList.add('show', 'success');
+				showMessageDiv.innerHTML =
 					'<h4>Sending you email address was successful!</h4>';
 				break;
 			case 'error':
-				notificationDiv.classList.add('show', 'error');
-				notificationDiv.innerHTML = '<h4>You missing your email address!</h4>';
+				showMessageDiv.classList.add('show', 'error');
+				showMessageDiv.innerHTML = '<h4>You missing your email address!</h4>';
 				break;
 			default:
 				break;
 		}
 
-		if (notificationDiv.classList.contains('show')) {
+		if (showMessageDiv.classList.contains('show')) {
 			setTimeout(() => {
-				notificationDiv.classList.remove('show');
+				showMessageDiv.classList.remove('show');
 			}, 4000);
 		}
 	};

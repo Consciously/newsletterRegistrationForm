@@ -22,7 +22,8 @@ body {
 }
 
 h3 {
-	font-size: 1.8rem;
+	font-size: clamp(1.1rem, 3vw, 1.8rem);
+	/* font-size: 3vw; */
 	text-align: center;
 	margin-bottom: 0.5rem;
 	text-transform: uppercase;
@@ -88,7 +89,8 @@ h3 {
 	transform: translate(-50%, -100%);
 	width: 30vw;
 	padding: 2rem 5rem;
-	font-size: 1.2rem;
+	font-size: clamp(1rem, 3vw, 1.2rem);
+	text-align: center;
 	opacity: 0;
 	box-shadow: 0px 3px 10px rgb(0 0 0 / 60%);
 	animation-name: messageUp;
@@ -117,11 +119,14 @@ h3 {
 }
 
 .newsletter {
+	display: flex;
+	flex-direction: column;
+	align-content: space-between;
 	background-color: #1c2c30;
 	padding: 2rem 5rem;
 	margin-top: 2rem;
 	border-radius: 1.25rem;
-	height: 25rem;
+	width: 100%;
 }
 
 .newsletter p {
@@ -129,8 +134,7 @@ h3 {
 	font-size: 1.2rem;
 }
 
-.newsletter form,
-.newsletter p {
+.newsletter form {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
