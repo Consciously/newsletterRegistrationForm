@@ -11,6 +11,7 @@
 		"no-tabs": 0,
 		"comma-dangle": ["error", "never"],
 		"arrow-parens": ["error", "as-needed"],
-		"operator-linebreak": ["error", "after"]
+		"operator-linebreak": ["error", "after"],
+		"no-param-reassign": ["error", { "props": false }]
 	}
 }

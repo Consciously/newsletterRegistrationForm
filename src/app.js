@@ -8,6 +8,7 @@ class Newsletter {
 		this.body = document.body;
 		this.container = document.querySelector('.container');
 		this.newsletter = this.container.querySelector('.newsletter');
+		// Content.createContent(childElem, parentElem, classAttr, template);
 	}
 
 	initialContent = () => {
