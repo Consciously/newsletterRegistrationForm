@@ -11,9 +11,9 @@ export default class Content {
 
 		if (template !== '') {
 			if (childElem) {
-				cElem.insertAdjacentHTML('beforeend', template);
+				cElem.insertAdjacentHTML('afterbegin', template);
 			} else {
-				parentElem.insertAdjacentHTML('beforeend', template);
+				parentElem.insertAdjacentHTML('afterbegin', template);
 			}
 		}
 		if (childElem) {
