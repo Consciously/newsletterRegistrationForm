@@ -1,5 +1,6 @@
 import './styles/style.css';
 import showLoader from './loader';
+import Content from './createContent';
 
 class Newsletter {
 	constructor() {
@@ -10,11 +11,12 @@ class Newsletter {
 	}
 
 	initialContent = () => {
-		const initText = `
-			<h3>Subscribe our newsletter!</h3>
-		`;
-
-		this.container.innerHTML = initText;
+		Content.createContent(
+			'',
+			this.container,
+			'',
+			'<h3>Subscribe our newsletter!</h3>'
+		);
 
 		this.bodyEvent();
 	};
@@ -52,34 +54,35 @@ class Newsletter {
 	};
 
 	createNewsletter = () => {
-		const newsletterDiv = this.document.createElement('div');
-		newsletterDiv.classList.add('newsletter');
-		const newsletter = `
-					<h3>To stay up-to-date, please subscribe our newsletter!</h3>
-					<form id="newsletterForm"">
-						<input type="email" id="email" />
-						<input type="submit" class="subscribe" value="Subscribe" />
-					</form>
-		`;
-
-		newsletterDiv.innerHTML += newsletter;
-
-		this.container.appendChild(newsletterDiv);
+		Content.createContent(
+			'div',
+			this.container,
+			'newsletter',
+			`
+			<h3>To stay up-to-date, please subscribe our newsletter!</h3>
+				<form id="newsletterForm"">
+				<input type="email" id="email" />
+				<input type="submit" class="subscribe" value="Subscribe" />
+			</form>
+			`
+		);
 
 		this.closeBtn();
 	};
 
 	createConfirmation = () => {
-		const confirmation = `
-			<div class="newsletter">
+		Content.createContent(
+			'div',
+			this.container,
+			'newsletter',
+			`
 				<h3>Confirmation of your subscription</h3>
 				<p>
 					Hey and thank you for your subscription. We send a email to you. Plese check your inbox of your email provider and click the confirmation link to complete the subscription. We appreciate your choice and we promise not to spam you!
 				</p>
-			</div>
-		`;
+		`
+		);
 
-		this.container.innerHTML += confirmation;
 		this.closeBtn();
 	};
 
